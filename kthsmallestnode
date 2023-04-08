@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int v)
+    {
+        val = v;
+        left = right = NULL;
+    }
+};
+
+class BeingZero
+{
+public:
+void printvector(TreeNode*root,vector<int>&v)
+    {
+        if(root==NULL)
+            return;
+        printvector(root->left,v);
+        v.push_back(root->val);
+        printvector(root->right,v);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>v;
+        printvector(root,v);
+        return v;
+    }
+    int kthSmallestElement(TreeNode *root, int k)
+    {
+        int ans;
+        // TODO: Just complete given function and
+        // return the kth smallest element of the BST
+        // Input Reading and Output Printing is already taken care
+        vector<int>v;
+        v=inorderTraversal(root);
+        ans=v[k-1];
+        return ans;
+    }
+};
