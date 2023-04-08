@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+int ans;
+class BSTNode{
+	public:
+	int val;
+	BSTNode *left,*right;
+	BSTNode(int v)
+	{
+		val=v;
+		left=right=NULL;
+	}
+};
+BSTNode *insertInBST(BSTNode *r,int v)
+{
+	if(r==NULL){
+	  return new BSTNode(v);
+	}
+    if(v<=r->val){
+	  r->left=insertInBST(r->left,v);
+    }
+	else{
+	  r->right=insertInBST(r->right,v);
+	}
+	return r;
+}
+void maxDepthH(BSTNode *r,int d)
+{
+	if(r==NULL)
+	  return;
+    ans=max(ans,d);
+    maxDepthH(r->left,d+1);
+	maxDepthH(r->right,d+1);
+}
+int maxDepth(BSTNode *r)
+{
+	ans=0;
+	maxDepthH(r,0);
+	return ans;
+}
+int main(){
+	int t,m;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		BSTNode *r=NULL;
+		for(int i=0;i<n;i++)
+		{
+			int x;
+			cin>>x;
+			r=insertInBST(r,x);
+		}
+	m=maxDepth(r);
+	cout<<m<<"\n";	
+	}
+	return 0;
+}
