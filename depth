@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int ans;
+struct TreeNode{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+	TreeNode(int v){
+		val = v;
+		left = right = NULL;
+	}
+};
+
+class BeingZero{
+	public:
+
+   void maxDepthH(TreeNode *r,int d)
+   {
+	if(r==NULL)
+	  return;
+    ans=max(ans,d);
+    maxDepthH(r->left,d+1);
+	maxDepthH(r->right,d+1);
+    }	
+    int maxDepth(TreeNode* root) {
+    ans=0;
+	maxDepthH(root,1);
+	return ans;  
+        
+    }
+};
