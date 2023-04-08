@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+class BSTNode{
+	public:
+	int val;
+	BSTNode *left,*right;
+	BSTNode(int v)
+	{
+		val=v;
+		left=right=NULL;
+	}
+};
+BSTNode *insertInBST(BSTNode *r,int v)
+{
+	if(r==NULL){
+	  return new BSTNode(v);
+	}
+    if(v<=r->val){
+	  r->left=insertInBST(r->left,v);
+    }
+	else{
+	  r->right=insertInBST(r->right,v);
+	}
+	return r;
+}
+void preOrderTraversal(BSTNode *r)
+{
+	if(r!=NULL)
+	{
+		cout<<r->val<<" ";
+		preOrderTraversal(r->left);
+		preOrderTraversal(r->right);
+	}
+}
+void inOrderTraversal(BSTNode *r)
+{
+	if(r!=NULL)
+	{
+	    inOrderTraversal(r->left);
+	    cout<<r->val<<" ";
+		inOrderTraversal(r->right);
+	}
+}
+void postOrderTraversal(BSTNode *r)
+{
+	if(r!=NULL)
+	{
+		postOrderTraversal(r->left);
+		postOrderTraversal(r->right);
+		cout<<r->val<<" ";
+	}
+}
+void printTraversal(BSTNode *r)
+{
+	preOrderTraversal(r);
+	cout<<"\n";
+	inOrderTraversal(r);
+	cout<<"\n";
+	postOrderTraversal(r);
+	cout<<"\n";
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		BSTNode *r=NULL;
+		for(int i=0;i<n;i++)
+		{
+			int x;
+			cin>>x;
+			r=insertInBST(r,x);
+		}
+		printTraversal(r);
+		cout<<"\n";
+	}
+	return 0;
+}
